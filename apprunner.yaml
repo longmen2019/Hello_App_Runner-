@@ -1,11 +1,14 @@
-version: 1.0
-runtime: python3
-build:
-  commands:
-    build:
-    - yum install -y pycairo
-    - pip install -r requirements.txt
-run:
-  command: python app.py
-  network:
-    port: 8000
+version: 1.0  # Specify the version of the configuration file
+
+runtime: python3  # Define the runtime environment as Python 3
+
+build:  # Section for build commands
+  commands:  # List of commands to run during the build phase
+    build:  # Define a build command
+    - yum install -y pycairo  # Install the pycairo library using yum package manager
+    - pip install -r requirements.txt  # Install Python dependencies listed in requirements.txt using pip
+
+run:  # Section for runtime commands
+  command: python app.py  # Command to run the application, which executes app.py
+  network:  # Network configuration section
+    port: 8000  # Specify the port number on which the application will run

@@ -1,27 +1,33 @@
 # Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
-AWSTemplateFormatVersion: 2010-09-09
-Description: CloudFormation template that deploys hello-app-runner app
-Parameters:
-  ServiceName:
-    Type: String
-    Default: hello-app-runner
-    Description: Name for your App Runner service.
-Resources:
-  Service:
-    Metadata:
-      'aws:apprunner:description': 'hello-app-runner example service'
-    Type: AWS::AppRunner::Service
-    Properties:
-      ServiceName: !Ref ServiceName
-      SourceConfiguration:
-        AutoDeploymentsEnabled: false
-        ImageRepository:
-          ImageIdentifier: public.ecr.aws/aws-containers/hello-app-runner:latest
-          ImageRepositoryType: ECR_PUBLIC
-          ImageConfiguration:
-            Port: 8000
-Outputs:
-  Endpoint:
-    Description: "The endpoint of the App Runner service."
-    Value: !GetAtt Service.ServiceUrl
+# This is a CloudFormation template for deploying a hello-app-runner application.
+
+AWSTemplateFormatVersion: 2010-09-09  # Specify the version of the AWS CloudFormation template format being used.
+
+Description: CloudFormation template that deploys hello-app-runner app  # Provide a description of the CloudFormation template.
+
+Parameters:  # Define parameters that can be passed to the template.
+  ServiceName:  # Parameter for the name of the App Runner service.
+    Type: String  # Specify the type of the parameter as a string.
+    Default: hello-app-runner  # Set the default value for the parameter.
+    Description: Name for your App Runner service.  # Provide a description for the parameter.
+
+Resources:  # Define the AWS resources to be created by the template.
+  Service:  # Define a resource named "Service".
+    Metadata:  # Provide metadata for the resource.
+      'aws:apprunner:description': 'hello-app-runner example service'  # Add a description for the App Runner service.
+    Type: AWS::AppRunner::Service  # Specify the type of the resource as an App Runner service.
+    Properties:  # Define properties for the App Runner service.
+      ServiceName: !Ref ServiceName  # Set the service name using the value of the ServiceName parameter.
+      SourceConfiguration:  # Define the source configuration for the service.
+        AutoDeploymentsEnabled: false  # Disable automatic deployments.
+        ImageRepository:  # Define the image repository configuration.
+          ImageIdentifier: public.ecr.aws/aws-containers/hello-app-runner:latest  # Specify the image identifier from the public ECR repository.
+          ImageRepositoryType: ECR_PUBLIC  # Set the image repository type to public ECR.
+          ImageConfiguration:  # Define the image configuration.
+            Port: 8000  # Specify the port on which the application will run.
+
+Outputs:  # Define the outputs of the CloudFormation stack.
+  Endpoint:  # Define an output named "Endpoint".
+    Description: "The endpoint of the App Runner service."  # Provide a description for the output.
+    Value: !GetAtt Service.ServiceUrl  # Set the value of the output to the service URL of the App Runner service.

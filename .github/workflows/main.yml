@@ -1,31 +1,31 @@
-name: main
+name: main  # The name of the workflow
 
-on:
-  push:
-    branches: main
+on:  # Specifies the events that trigger the workflow
+  push:  # Trigger the workflow on push events
+    branches: main  # Only trigger on pushes to the 'main' branch
 
-jobs:
-  login:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Out Repo
-        uses: actions/checkout@v2
+jobs:  # Defines the jobs to be run in the workflow
+  login:  # The ID of the job
+    runs-on: ubuntu-latest  # The job will run on the latest version of an Ubuntu runner
+    steps:  # A list of steps to be executed in the job
+      - name: Check Out Repo  # Step name for checking out the repository
+        uses: actions/checkout@v2  # Uses the checkout action to clone the repository
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx  # Step name for setting up Docker Buildx
+        uses: docker/setup-buildx-action@v1  # Uses the Docker Buildx setup action
 
-      - name: Login to Public ECR
-        uses: docker/login-action@v1
-        with:
-          registry: public.ecr.aws
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        env:
-          AWS_REGION: us-east-1
+      - name: Login to Public ECR  # Step name for logging into Amazon ECR
+        uses: docker/login-action@v1  # Uses the Docker login action
+        with:  # Specifies inputs for the action
+          registry: public.ecr.aws  # The ECR registry to log into
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}  # AWS access key ID from secrets
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # AWS secret access key from secrets
+        env:  # Environment variables for the step
+          AWS_REGION: us-east-1  # AWS region to use
 
-      - name: Build and push container
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: public.ecr.aws/aws-containers/hello-app-runner:latest
+      - name: Build and push container  # Step name for building and pushing the Docker container
+        uses: docker/build-push-action@v2  # Uses the Docker build and push action
+        with:  # Specifies inputs for the action
+          context: .  # The build context (current directory)
+          push: true  # Push the built image to the registry
+          tags: public.ecr.aws/aws-containers/hello-app-runner:latest  # Tag for the Docker image
