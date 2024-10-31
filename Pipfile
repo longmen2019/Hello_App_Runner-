@@ -1,17 +1,17 @@
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
+[[source]]  # Define a source for Python packages.
+url = "https://pypi.org/simple"  # URL of the Python Package Index (PyPI) where packages will be downloaded from.
+verify_ssl = true  # Ensure SSL verification is enabled for secure connections to the package index.
+name = "pypi"  # Name the source as "pypi".
 
-[packages]
-py-avataaars = "*"
-pillow = "*"
-requests = "*"
-starlette = "*"
-uvicorn = "*"
-starlette-exporter = "*"
+[packages]  # Define the packages required for the project.
+py-avataaars = "*"  # Include the py-avataaars package, allowing any version.
+pillow = "*"  # Include the Pillow package for image processing, allowing any version.
+requests = "*"  # Include the Requests package for making HTTP requests, allowing any version.
+starlette = "*"  # Include the Starlette package for building ASGI applications, allowing any version.
+uvicorn = "*"  # Include the Uvicorn package for running ASGI applications, allowing any version.
+starlette-exporter = "*"  # Include the Starlette Exporter package for Prometheus metrics, allowing any version.
 
-[dev-packages]
+[dev-packages]  # Define development packages (none specified in this case).
 
-[requires]
-python_version = "3.8"
+[requires]  # Define the Python version required for the project.
+python_version = "3.8"  # Specify that Python version 3.8 is required.
